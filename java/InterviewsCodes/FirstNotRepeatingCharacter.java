@@ -16,10 +16,4 @@ public class FirstNotRepeatingCharacter {
 		}
 		return '_';
 	}
-
-	public static void main(String[] args) {
-
-		String str = "abacabad";
-		System.out.println(firstNotRepeatingCharacter(str));
-	}
 }
