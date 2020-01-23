@@ -18,15 +18,4 @@ public class SugarHigh {
 		}
 		return newArray;
 	}
-
-	public static void main (String[] args) {
-
-		int[] candy = {34, 5, 56, 67, 8, 89};
-		int sugar = 50;
-
-		for (int i : sugarHigh(candy, sugar)) {
-			System.out.print(i+"-");
-		}
-		System.out.println();
-	}
 }
