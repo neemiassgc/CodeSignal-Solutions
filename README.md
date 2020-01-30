@@ -1,2 +1,2 @@
 # CodeSignal
-CodeSignal Solutions
+CodeSignal solutions

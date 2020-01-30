@@ -23,15 +23,15 @@ public final class Sudoku {
 	    for(int i = 0, x = 1; i < 3; i++, x += 3) {
 	        str = "";
 	        for(int j = 0, y = 1; j < 3; j++, y += 3, str = "") {
-	            str += grid[x][y]+"";
-	            str += grid[x][y + 1]+"";
-	            str += grid[x - 1][y + 1]+"";
-	            str += grid[x + 1][y + 1]+"";
-	            str += grid[x][y - 1]+"";
-	            str += grid[x - 1][y - 1]+"";
-	            str += grid[x + 1][y - 1]+"";
-	            str += grid[x + 1][y]+"";
-	            str += grid[x- 1][y]+"";
+	            str += grid[x][y];
+	            str += grid[x][y + 1];
+	            str += grid[x - 1][y + 1];
+	            str += grid[x + 1][y + 1];
+	            str += grid[x][y - 1];
+	            str += grid[x - 1][y - 1];
+	            str += grid[x + 1][y - 1];
+	            str += grid[x + 1][y];
+	            str += grid[x- 1][y];
 	            if(!check(str)) { r++; }
 	        }
 	    }
