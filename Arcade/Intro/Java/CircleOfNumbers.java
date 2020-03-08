@@ -8,7 +8,7 @@ public final class CircleOfNumbers {
 	    }
 	    for(int i = 0, x = firstNumber + 1; i < n / 2; i++, x++) {
 	    	if(x > n - 1) { x = 0; }
-	    	r = circle[x];
+	    	c = circle[x];
 	    }
 	    return c;
 	}
