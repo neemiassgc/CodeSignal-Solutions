@@ -1,40 +1,47 @@
-public final class Sudoku2 {
+import java.util.Arrays;
 
-    boolean check(String str) {
-        String chars = "";
-        int r = 0;
-        for(char c : str.toCharArray()) {
-            if(!chars.contains(c+"") || c == '.') { chars += c+""; }
-            else { r++; }
-        }
-        return r == 0;
-    }
+final class Sudoku2 {
 
     boolean sudoku2(char[][] grid) {
-        String str = "";
-        int r = 0;
-        for(int i = 0; i < 9; i++, str = "") {
-            for(int j = 0; j < 9; j++) { str += grid[i][j]+""; }
-            if(!check(str)) { r++; }
-            str = "";
-            for(int j = 0; j < 9; j++) { str += grid[j][i]+""; }
-            if(!check(str)) { r++; }
-        }
-        for(int i = 0, x = 1; i < 3; i++, x += 3) {
-            str = "";
-            for(int j = 0, y = 1; j < 3; j++, y += 3, str = "") {
-                str += grid[x][y];
-                str += grid[x][y + 1];
-                str += grid[x - 1][y + 1];
-                str += grid[x + 1][y + 1];
-                str += grid[x][y - 1];
-                str += grid[x - 1][y - 1];
-                str += grid[x + 1][y - 1];
-                str += grid[x + 1][y];
-                str += grid[x- 1][y];
-                if(!check(str)) { r++; }
+        int[] row = new int[9],
+            col = new int[9],
+            box = new int[9];
+        
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
+                // check row
+                if(grid[i][j] != '.')
+                    col[new Integer(grid[i][j]+"") - 1]++;
+                
+                // check col
+                if(grid[j][i] != '.')
+                    row[new Integer(grid[j][i]+"") - 1]++;
             }
+            
+            // check box
+            if((i + 1) % 3 == 0) {
+                for(int t = 8; t > 0; t -= 3) {
+                    for(int p = t; p > t - 3; p--) {
+                        for(int q = i; q > i - 3; q--) {
+                            if(grid[p][q] != '.')
+                                box[new Integer(grid[p][q]+"") - 1]++;
+                        }
+                    }
+                    
+                    for(int p : box) if(p > 1) return false;
+                    
+                    Arrays.fill(box, 0);  
+                }
+            }
+            
+            for(int p = 0; p < 9; p++) {
+                if(row[p] > 1 || col[p] > 1) return false;
+            }
+            
+            Arrays.fill(row, 0);
+            Arrays.fill(col, 0);
         }
-        return r == 0;
+        
+        return true;
     }
 }
