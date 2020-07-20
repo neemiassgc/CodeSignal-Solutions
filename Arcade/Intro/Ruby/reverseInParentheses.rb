@@ -1,7 +1,6 @@
 def reverseInParentheses(inputString)
-	reg = /\(\w*\)/
+    reg = /\(\w*\)/
 	return inputString unless reg.match? inputString
-	ss = reg.match(inputString).to_s
-	s = ss.delete_prefix("(").delete_suffix(")").reverse
-	return reverseInParentheses inputString.gsub(ss, s)
+	s = reg.match(inputString).to_s
+	return reverseInParentheses inputString.gsub(s, s[1..(s.size - 2)].reverse)
 end

@@ -1,8 +1,10 @@
 def digitDegree(n)
-    s, g, t = n.to_s, 0, 0
-    while s.size > 1 do
-        s.each_char { |i| t += i.to_i }
-        s, t, g = t.to_s, 0, g + 1
+    counter = 0
+    
+    while n.to_s.size > 1
+        n = n.to_s.chars.map{|e| e.to_i}.sum
+        counter += 1
     end
-    return g
+    
+    return counter
 end

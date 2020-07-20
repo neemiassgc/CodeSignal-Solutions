@@ -1,3 +1,3 @@
 def isDigit(symbol)
-    return (symbol.ord >= 48 and symbol.ord <= 57)
+    return symbol.match? /\d/
 end

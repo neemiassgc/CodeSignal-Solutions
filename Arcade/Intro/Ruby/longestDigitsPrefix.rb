@@ -1,11 +1,11 @@
 def longestDigitsPrefix(inputString)
-    str, b = "", true
-    inputString.each_byte do |c|
-        if b and c >= 48 and c <= 57 then
-            str += c.chr
-        else   
-            b = !b if b
+    out = ""
+    
+    inputString.chars.to_a.each do |c|
+        if /\d/.match? c then out += c
+        else break
         end
     end
-    return str
+    
+    return out;
 end

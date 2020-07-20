@@ -1,8 +1,15 @@
 def sortByHeight(a)
-	values, trees = [], []
-	a.each_index { |t| trees.push t if a[t] == -1 }
-	a.sort!
-	a.each { |v| values.push v unless v == -1 }
-	trees.each { |i| values.insert(i, -1) }
-	return values
+    a.size.times do |i|
+		(i..(a.size - 1)).each do |j|
+			if a[i] != -1 && a[j] != -1
+                if a[i] > a[j]
+                    tmp = a[i]
+                    a[i] = a[j]
+                    a[j] = tmp
+                end
+            end
+		end
+	end
+	
+	return a
 end

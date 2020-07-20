@@ -1,3 +1,3 @@
 def firstDigit(inputString)
-	inputString.each_byte { |c| return c.chr if c >= 48 and c <= 57 }
+    return inputString.chars.filter{|e| /\d/.match? e}[0]
 end

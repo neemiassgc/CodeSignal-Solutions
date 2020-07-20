@@ -1,30 +1,27 @@
 def sudoku(grid)
-    arr, x, r = [], 1, 0
-    9.times do |t|
-        arr = []
-        9.times { |v| arr.push grid[t][v] }
-        r += 1 unless arr.uniq.to_s.eql? arr.to_s
-        arr = []
-        9.times { |v| arr.push grid[v][t] }
-        r += 1 unless arr.uniq.to_s.eql? arr.to_s
-    end
-    3.times do
-        y = 1
-        3.times do
-            arr = []
-            arr.push grid[x][y]
-            arr.push grid[x][y + 1]
-            arr.push grid[x - 1][y + 1]
-            arr.push grid[x + 1][y + 1]
-            arr.push grid[x][y - 1]
-            arr.push grid[x - 1][y - 1]
-            arr.push grid[x + 1][y - 1]
-            arr.push grid[x + 1][y]
-            arr.push grid[x- 1][y]
-            r += 1 unless arr.uniq.to_s.eql? arr.to_s
-            y += 3
+    row, col, box = Array.new(9, 0), Array.new(9, 0), Array.new(9, 0)
+    n = grid.size
+    sqrt = Math.sqrt(n).to_i
+    
+    n.times do |i|
+        n.times do |j|
+            row[grid[i][j] - 1] += 1
+            col[grid[j][i] - 1] += 1
         end
-        x += 3
+        
+        sq = i - i % sqrt
+        (sq...(sq + sqrt)).each do |y|
+            (sq...(sq + sqrt)).each{|x| box[grid[y][x] - 1] += 1}
+        end
+        
+        n.times do |j|
+            return false if col[j] == 0 or row[j] == 0 or  box[j] == 0
+        end
+        
+        box = box.fill 0
+        row = row.fill 0
+        col = col.fill 0
     end
-    return r == 0
+    
+    return true
 end

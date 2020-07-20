@@ -1,8 +1,7 @@
 def alternatingSums(a)
-	r, b = [0, 0], true
-	a.each do |i|
-		r[b ? 0 : 1] += i
-		b = !b
+	def alternatingSums(a)
+	    o = [0, 0]
+		a.size.times{|i| o[(i + 1) % 2 == 0 ? 1 : 0] += a[i]}
+		return o
 	end
-	return r
 end

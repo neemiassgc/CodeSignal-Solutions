@@ -1,16 +1,15 @@
 def almostIncreasingSequence(sequence)
-	isIncreasing = ->(seq) do
-		(1...seq.size).each do |s|
-			return false if seq[s] <= seq[s - 1]
-		end
-		return true
-	end
-	(0...sequence.size).each do |i|
-		arr = []
-		for v in (0...sequence.size) do
-			arr.push(sequence[v]) if v != i
-		end
-		return true if isIncreasing.call arr
-	end
-	return false
+	l, lp, c = -100000, l, c = 0
+    
+    sequence.each do |e|
+        if e <= l
+            c += 1
+            l = e if e > lp
+            next
+        end
+        lp = l;
+        l = e;
+    end
+    
+    return c <= 1;
 end

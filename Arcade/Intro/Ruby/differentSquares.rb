@@ -1,12 +1,12 @@
 def differentSquares(matrix)
-    str, sums = "", []
-    (1...matrix.size).each do |i|
-        (1...matrix[0].size).each do |j|
-            str += matrix[i][j].to_s+matrix[i][j - 1].to_s+
-	            matrix[i - 1][j - 1].to_s+matrix[i - 1][j].to_s
-            sums.push str unless sums.include? str
-            str = ""
+    set = []
+    (matrix.size - 1).times do |x|
+        (matrix[0].size - 1).times do |y|
+            aux = ""
+            (x..x+1).to_a.each{|i|
+            (y..y+1).to_a.each{|j| aux += matrix[i][j].to_s}}
+            set.push aux if !set.include?(aux)
         end
     end
-    return sums.size
+    return set.size
 end

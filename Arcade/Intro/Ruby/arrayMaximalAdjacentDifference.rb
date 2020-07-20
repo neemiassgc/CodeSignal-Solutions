@@ -1,8 +1,10 @@
-def arrayMaximalAdjacentDifference(inputArray)
-    max = 0
-    (inputArray.size - 1).times do |i|
-        int = inputArray[i + 1] - inputArray[i]
-        max = (int.abs > max) ? int.abs : max 
+def arrayMaxConsecutiveSum(inputArray, k)
+    max = t = 0
+    
+    (0..(inputArray.size - k)).each do |i|
+        t = (i...(i + k)).to_a.map{|j| inputArray[j]}.sum
+        max = t if t > max
     end
+    
     return max
 end

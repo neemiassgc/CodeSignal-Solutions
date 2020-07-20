@@ -1,15 +1,13 @@
 def avoidObstacles(inputArray)
-	b = true
-	c = 2;
-	loop do
-		inputArray.each do |i|
-			if i % c == 0 then
-				b = !b
-				break
-			end
-		end
-		return c if b
-		b = true
-		c += 1
-	end
+	k, i = true, 2
+    loop do
+        inputArray.each do |e|
+            if e % i == 0
+                k = !k
+                break
+            end
+        end
+        return i if k
+        k, i = true, i + 1
+    end
 end

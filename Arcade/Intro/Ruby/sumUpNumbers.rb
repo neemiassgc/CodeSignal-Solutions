@@ -1,13 +1,17 @@
 def sumUpNumbers(inputString)
-    sum, nums = 0, ""
+    sum, aux = 0, ""
+    inputString.sub!(/[^\d]/, " ")
+    
     inputString.size.times do |i|
-    	b = inputString[i].ord
-    	if b >= 48 and b <= 57 then nums += inputString[i]
-    	else
-    		sum += nums.to_i
-    		nums.clear
-    	end
-    	sum += nums.to_i if nums.size > 0 and i == inputString.size - 1
+        if /\D/.match? inputString[i]
+            sum += aux.to_i
+            aux = ""
+            i -= 1
+            next
+        end
+        aux += inputString[i]
     end
+    sum += aux.to_i
+    
     return sum
 end

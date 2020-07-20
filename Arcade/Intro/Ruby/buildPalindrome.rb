@@ -1,9 +1,6 @@
 def buildPalindrome(st)
 	return st if st.reverse.eql? st
-	res = sg = ""
-	st.each_char do |ch|
-		sg += ch.to_s
-		res = (st+sg.reverse)
-		return res if res.reverse.eql? res
-	end
+	out = sg = ""
+	st.each_char{|ch|
+	return out if (out = st+(sg += ch.to_s).reverse).reverse.eql? out}
 end

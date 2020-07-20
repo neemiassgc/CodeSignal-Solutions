@@ -1,6 +1,3 @@
-def arrayReplace(inputArray, elemToReplace, substitutionElem)
-    inputArray.each_index do |i|
-        inputArray[i] = substitutionElem if inputArray[i] == elemToReplace
-    end
-    return inputArray
+def arrayReplace(inputArray, elemToReplace, substitutionElem)    
+    return inputArray.map{|e| e == elemToReplace ? substitutionElem : e}
 end

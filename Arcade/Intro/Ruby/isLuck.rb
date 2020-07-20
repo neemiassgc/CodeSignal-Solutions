@@ -1,11 +1,5 @@
-def isLuck(n)
-	h1, h2 = 0, 0
-	(0...n.to_s.size).each do |v|
-		if v <= (n.to_s.size - 1) / 2 then
-			h1 += n.to_s[v].to_i
-			next
-		end
-		h2 += n.to_s[v].to_i
-	end
-	return h1 == h2
+def isLucky(n)
+    str = n.to_s
+    return str[0...str.size / 2].chars.map{|e| e.to_i}.sum ==
+    str[(str.size / 2)..str.size].chars.map{|e| e.to_i}.sum
 end

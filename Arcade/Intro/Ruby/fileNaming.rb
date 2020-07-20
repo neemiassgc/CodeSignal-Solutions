@@ -1,15 +1,13 @@
 def fileNaming(names)
-    list = []
+    set = []
     names.size.times do |i|
-        unless list.include? names[i] then list.push names[i]
-        else 
-            s, n = names[i], 0
-            while list.include? s do
-                n += 1
-                s = names[i]+"(#{n.to_s})"
-            end
-            list.push s
+        aux, k = names[i], 1
+        while set.include? aux
+            aux = names[i]+"("+k.to_s+")"
+            k += 1
         end
+       set.push aux
     end
-    return list
+    
+    return set
 end

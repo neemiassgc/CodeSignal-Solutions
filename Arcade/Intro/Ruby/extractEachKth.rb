@@ -1,7 +1,4 @@
 def extractEachKth(inputArray, k)
-    arr = []
-    (1..inputArray.size).each do |i|
-        arr.push inputArray[i - 1] unless i % k == 0
-    end
-    return arr
+    return (0...inputArray.size).to_a
+    .filter{|i| (i + 1) % k != 0}.map{|i| inputArray[i]}
 end
