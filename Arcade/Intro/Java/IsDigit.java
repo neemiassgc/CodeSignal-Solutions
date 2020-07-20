@@ -1,3 +1,6 @@
-boolean isDigit(char symbol) {
-    return ((int)symbol >= 48 && (int)symbol <= 57);
+final class IsDigit {
+
+	boolean isDigit(char symbol) {
+	    return (symbol+"").matches("\\d");
+	}
 }

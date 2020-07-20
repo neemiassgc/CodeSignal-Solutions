@@ -1,22 +1,27 @@
-public final class LineEnconding {
+import java.util.List;
+import java.util.ArrayList;
+
+final class LineEnconding {
 
 	String lineEncoding(String s) {
-	    String str = "", res = "";
-	    ArrayList<String> list = new ArrayList();
+	    List<String> subs = new ArrayList<>();
+	    String aux = "", out = "";
+	    char prev = s.charAt(0);
+	    
 	    for(int i = 0; i < s.length(); i++) {
-	        if(i == 0) { str += s.charAt(i)+""; }
-	        else if(s.charAt(i) == s.charAt(i - 1)) { str += s.charAt(i)+""; }
-	        else {
-	            list.add(str);
-	            str = s.charAt(i)+"";
+	        char curr = s.charAt(i);
+	        if(curr != prev) {
+	            subs.add(aux);
+	            aux = (prev = curr)+"";
+	            continue;
 	        }
-	        if(i + 1 == s.length()) { list.add(str); }
+	        aux += prev = curr;
 	    }
-	    for(int i = 0; i < list.size(); i++) {
-	        int len = list.get(i).length(); 
-	        if(len > 1) { res += len+""+list.get(i).charAt(0); }
-	        else { res += list.get(i).charAt(0)+""; }
-	    }
-	    return res;
+	    subs.add(aux);
+	    
+	    for(String v : subs) out += ""+(v.length() > 1 ? v.length() : "")+v.charAt(0);
+	        
+	    return out;
 	}
+
 }

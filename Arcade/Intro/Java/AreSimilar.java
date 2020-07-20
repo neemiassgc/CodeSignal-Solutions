@@ -1,21 +1,34 @@
-public class AreSimilar {
+import java.util.Arrays;
+
+final class AreSimilar {
+
+	void swap(int[] a, int p, int q) {
+	    int tmp = a[p];
+	    a[p] = a[q];
+	    a[q] = tmp;
+	}
 
 	boolean areSimilar(int[] a, int[] b) {
-		int c = 0, n1 = 0, n2 = 0, nn1 = 0, nn2 = 0;
-		for(int i = 0; i < a.length; i++) {
+	    if(Arrays.equals(a, b)) return true;
+	    int p = 0, q = 0;
+	    
+	    for(int i = 0, k = 2; i < b.length; i++) {
 	        if(a[i] != b[i]) {
-	            if(c == 0) {
-	                n1 = a[i];
-	                n2 = b[i];
+	            if(k == 2) {
+	                p = i;
+	                k--;
+	                continue;
 	            }
-	            else if(c == 1) {
-	                nn1 = b[i];
-	                nn2 = a[i];
-	            }
-	            c++;
+	            q = i;
+	            k--;
 	        }
-		}
-	    return (n1 == nn1 && n2 == nn2 && c <= 2);
-	}    
+	        if(k == 0) {
+	            swap(b, p, q);
+	            return Arrays.equals(a, b);
+	        }
+	    }
+	    
+	    return false;
+	}
 }
 

@@ -1,10 +1,7 @@
-public final class DepositProfit {
+final class DepositProfit {
 
 	int depositProfit(int deposit, int rate, int threshold) {
 	    float d = deposit;
-	    for(int y = 1;; y++) {
-	        d += d / 100f * rate;
-	        if(d >= threshold) { return y; }
-	    }
+	    for(int y = 1;; y++) if((d += rate / 100f * d) >= threshold) return y;
 	}
 }

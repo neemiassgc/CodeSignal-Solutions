@@ -1,9 +1,7 @@
-public final class ValidTime {
+final class ValidTime {
 
 	boolean validTime(String time) {
-	    String[] ptrs = time.split(":");
-	    int hh = Integer.valueOf(ptrs[0]).intValue();
-	    int mm = Integer.valueOf(ptrs[1]).intValue();
-	    return (hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59);
+	    String[] dig = time.split(":");
+	    return new Integer(dig[0]) < 24 && new Integer(dig[1]) < 60;
 	}
 }

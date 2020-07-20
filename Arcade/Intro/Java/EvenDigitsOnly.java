@@ -1,9 +1,6 @@
-public final class EvenDigitsOnly {
+final class EvenDigitsOnly {
 	
 	boolean evenDigitsOnly(int n) {
-	    for(char c : (n+"").toCharArray()) {
-	        if(Integer.valueOf(c+"") % 2 != 0) { return false; }
-	    }
-	    return true;
+	    return (n+"").chars().allMatch(e -> new Integer(e+"") % 2 == 0);
 	}
 }

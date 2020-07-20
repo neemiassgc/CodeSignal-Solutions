@@ -1,13 +1,7 @@
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+final class SumUpNumbers {
 
-public final class SumUpNumbers {
-
-	int sumUpNumbers(String inputString) {
-	    int sum = 0;
-	    Pattern ptt = Pattern.compile("[0-9]+");
-	    Matcher mtc = ptt.matcher(inputString);
-	    while(mtc.find()) { sum += Integer.valueOf(mtc.group()).intValue(); }
-	    return sum;
+	int sumUpNumbers(String inputString) {    
+	    return Arrays.stream(inputString.replaceAll("[^\\d]", " ").split(" "))
+	    .mapToInt(e -> !e.isEmpty() ? Integer.parseInt(e) : 0).sum();
 	}
 }

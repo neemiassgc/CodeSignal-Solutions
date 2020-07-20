@@ -1,33 +1,18 @@
-import java.util.List;
-import java.util.ArrayList;
-
-public class AlmostIncreasingSequence {
-	boolean isIncreasing(List<Integer> l) {
-	    int len = l.size();
-	    for(int i = 1; i < len; i++) {
-	        if(l.get(i) <= l.get(i - 1)) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
+final class AlmostIncreasingSequence {
 
 	boolean almostIncreasingSequence(int[] sequence) {
-	    int len = sequence.length;
-	    List<Integer> list = new ArrayList<Integer>();
-	    List<Integer> ll = new ArrayList<Integer>();
-	    for(int i : sequence) {
-	        list.add(Integer.valueOf(i));
-	    }
-
-	    for(int i = 0; i < len; i++) {
-	        ll.addAll(list);
-	        ll.remove(i);
-	        if(isIncreasing(ll)) {
-	            return true;
+	    int last = -0x186a0, lastPrev = -0x186a0, c = 0;
+	    
+	    for(int n : sequence) {
+	        if(n <= last) {
+	            c++;
+	            if(n > lastPrev) last = n;
+	            continue;
 	        }
-	        ll.clear();
+	        lastPrev = last;
+	        last = n;
 	    }
-	    return false;
+	    
+	    return c <= 1;
 	}
 }

@@ -1,27 +1,21 @@
-public class CommonCharacterCount {
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+
+final class CommonCharacterCount {
 	
 	int commonCharacterCount(String s1, String s2) {
-		String ss1 = "", ss2 = "", chs = "";
-		int cnt = 0;
-		for(char c : s1.toCharArray()) {
-			ss1 += (!ss1.contains(""+c)) ? ""+c : "";
-		}
-		for(char c : s2.toCharArray()) {
-			ss2 += (!ss2.contains(""+c)) ? ""+c : "";
-		}
-		for(char c : ss1.toCharArray()) {
-			chs += (ss2.contains(""+c)) ? ""+c : "";
-		}
-		for(char c : chs.toCharArray()) {
-			int c1 = 0, c2 = 0;
-			for(char cc : s1.toCharArray()) {
-				c1 += (cc == c) ? 1 : 0;
-			}
-			for(char cc : s2.toCharArray()) {
-				c2 += (cc == c) ? 1 : 0;
-			}
-			cnt += (c1 < c2) ? c1 : c2;
-		}
-		return cnt;
+	    int o = 0;
+	    String common = IntStream
+	        .range(0x61, 0x7b)
+	        .filter(n -> s1.contains((char)n+"") && s2.contains((char)n+""))
+	        .boxed().map(c -> (char)c.intValue()+"").collect(Collectors.joining());
+	    
+	    for(char c : common.toCharArray()) {
+	        o += Math.min(
+	            s1.chars().map(n -> c == (char)n ? 1 : 0).sum(),
+	            s2.chars().map(n -> c == (char)n ? 1 : 0).sum());
+	    }
+	    
+	    return o;
 	}
 }

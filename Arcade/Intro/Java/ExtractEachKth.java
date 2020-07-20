@@ -1,14 +1,9 @@
-import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public final class ExtractEachKth {
 
 	int[] extractEachKth(int[] inputArray, int k) {
-		ArrayList<Integer> list = new ArrayList();
-		for(int i = 1; i <= inputArray.length; i++) {
-			if(i % k != 0) { list.add(inputArray[i - 1]); }
-		}
-		int[] ret = new int[list.size()];
-		for(int i = 0; i < ret.length; i++) { ret[i] = list.get(i); }
-		return ret;
+	    return IntStream.range(0, inputArray.length)
+	    .filter(i -> (i + 1) % k != 0).map(i -> inputArray[i]).toArray();
 	}
 }

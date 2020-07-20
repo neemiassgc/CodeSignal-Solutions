@@ -1,35 +1,45 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public final class StringsRearrangement {
+final class StringsRearrangement {
 
-	boolean differByOneChar(String str1, String str2) {
-	    int len = str1.length();
-	    for(int i = 0; i < len; i++) {
-	        for(int j = 0; j < len; j++) {
-	            String s1 = "";
-	            for(int a = 0; a < len; a++) {
-	                s1 += (a != j) ? str1.charAt(a) : str2.charAt(i);
+	boolean flag;
+
+	boolean check(String s1, String s2) {
+	    int counter = 0;
+	   
+	    for(int i = 0; i < s1.length(); i++)
+	        if(s1.charAt(i) != s2.charAt(i)) counter++;
+	    
+	    return counter == 1;
+	}
+
+	void permute(String[] arr, int l, int h) {
+	    if(l == h) {
+	        flag = true;
+	        for(int i = 0; i < arr.length - 1; i++)
+	            if(!check(arr[i], arr[i + 1])) {
+	                flag = false;
+	                break;
 	            }
-	            if(s1.equals(str2)) { return true; }
+	    }
+	    else {
+	        for(int i = l; i <= h && !flag; i++) {
+	            swap(arr, l, i);
+	            permute(arr, l + 1, h);
+	            swap(arr, l, i);
 	        }
 	    }
-	    return false;
+	}
+
+	void swap(String[] arr, int i, int j) {
+	    String tmp = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = tmp;
 	}
 
 	boolean stringsRearrangement(String[] inputArray) {
-	    ArrayList<String> list = new ArrayList();
-	    for(String s : inputArray) {
-	        if(!list.contains(s)) { list.add(s); }
-	    }
-	    String[] array = list.toArray(new String[list.size()]);
-	    Arrays.sort(array);
-	    if(array.length == 1) { return false; }
-	    for(int i = 0; i < array.length - 1; i++) {
-	        if(!differByOneChar(array[i], array[i+1])) {
-	            return false;
-	        }
-	    }
-	    return true;
+	    permute(inputArray, 0, inputArray.length - 1);
+	    return flag;
 	}
 }

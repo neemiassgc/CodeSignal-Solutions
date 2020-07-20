@@ -1,10 +1,11 @@
-public final class AlphabeticShift {
+import java.util.stream.Collectors;
+
+final class AlphabeticShift {
 
 	String alphabeticShift(String inputString) {
-	    String str = "";
-	    for(char c : inputString.toCharArray()) {
-	        str += (c != 'z') ? (char)(c + 1) : "a";
-	    }
-	    return str;
+	    return inputString.chars().boxed()
+	        .map(c -> c == 122 ? 'a' : (char)(c + 1))
+	        .map(Object::toString)
+	        .collect(Collectors.joining());
 	}
 }

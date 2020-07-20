@@ -1,16 +1,20 @@
-public final class DifferentSquares {
+import java.util.Set;
+import java.util.HashSet;
+
+final class DifferentSquares {
 
 	int differentSquares(int[][] matrix) {
-	    int h = matrix.length, w = matrix[0].length;
-	    ArrayList<String> sums = new ArrayList();
-	    String s = "";
-	    for(int i = 1; i < h; i++) {
-	        for(int j = 1; j < w; j++, s = "") {
-	            s += ""+matrix[i][j]+matrix[i][j - 1]+
-	                    matrix[i - 1][j - 1]+matrix[i - 1][j];
-	            if(!sums.contains(s)) { sums.add(s); }
+	    Set<String> set = new HashSet<>();
+	    
+	    for(int x = 0; x < matrix.length - 1; x++) {
+	        for(int y = 0; y < matrix[0].length - 1; y++) {
+	            String aux = "";
+	            for(int i = x; i < x + 2; i++)
+	                for(int j = y; j < y + 2; j++) aux += matrix[i][j];
+	            set.add(aux);
 	        }
 	    }
-	    return sums.size();
+	    
+	    return set.size();
 	}
 }

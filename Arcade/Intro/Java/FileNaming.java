@@ -1,19 +1,17 @@
-public final class FileNaming {
+import java.util.Vector;
+
+final class FileNaming {
 
 	String[] fileNaming(String[] names) {
-	    List<String> list = new ArrayList();
+	    Vector<String> vector = new Vector<>();
+	    
 	    for(int i = 0; i < names.length; i++) {
-	        if(!list.contains(names[i])) {
-	        	list.add(names[i]);
-	        }
-	        else {
-	            String s = names[i];
-	            for(int n = 1; list.contains(s); n++) {
-	                s = names[i]+"("+n+")";
-	            }
-	            list.add(s);
-	        }
+	        String aux = names[i];
+	        for(int k = 1; vector.contains(aux); k++) aux = names[i]+"("+k+")";
+	        vector.add(aux);
+	        names[i] = aux;
 	    }
-	    return list.toArray(new String[list.size()]);
+	    
+	    return names;
 	}
 }

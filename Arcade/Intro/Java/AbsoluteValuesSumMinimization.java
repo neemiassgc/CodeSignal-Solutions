@@ -1,14 +1,13 @@
-public final class AbsoluteValuesSumMinimization {
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+final class AbsoluteValuesSumMinimization {
 
 	int absoluteValuesSumMinimization(int[] a) {
-	    int[] n = new int[a.length];
-	    for(int i = 0; i < a.length; i++) {
-	        for(int j : a) {
-	            n[i] += Math.abs(j - a[i]);
-	        }
-	    }
-	    int lower = n[0];
-	    for(int i : n) { lower = (i < lower) ? i : lower; }
-	    return a[Arrays.binarySearch(n, lower)];
+	    int[] sums = Arrays.stream(a).map(n -> Arrays.stream(a)
+	        .map(e -> Math.abs(n - e)).sum()).toArray();
+	    int min = Arrays.stream(sums).min().getAsInt();
+	    return a[IntStream.range(0, sums.length)
+	        .filter(i -> sums[i] == min).toArray()[0]];
 	}
 }

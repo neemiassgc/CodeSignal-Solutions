@@ -1,40 +1,30 @@
-public final class Sudoku {
+import java.util.Arrays;
 
-	boolean check(String str) {
-	    String chars = "";
-	    int r = 0;
-	    for(char c : str.toCharArray()) {
-	        if(!chars.contains(c+"")) { chars += c+""; }
-	        else { r++; }
-	    }
-	    return r == 0;
-	}
+final class Sudoku {
 
 	boolean sudoku(int[][] grid) {
-	    String str = "";
-	    int r = 0;
-	    for(int i = 0; i < 9; i++, str = "") {
-	        for(int j = 0; j < 9; j++) { str += grid[i][j]+""; }
-	        if(!check(str)) { r++; }
-	        str = "";
-	        for(int j = 0; j < 9; j++) { str += grid[j][i]+""; }
-	        if(!check(str)) { r++; }
-	    }
-	    for(int i = 0, x = 1; i < 3; i++, x += 3) {
-	        str = "";
-	        for(int j = 0, y = 1; j < 3; j++, y += 3, str = "") {
-	            str += grid[x][y];
-	            str += grid[x][y + 1];
-	            str += grid[x - 1][y + 1];
-	            str += grid[x + 1][y + 1];
-	            str += grid[x][y - 1];
-	            str += grid[x - 1][y - 1];
-	            str += grid[x + 1][y - 1];
-	            str += grid[x + 1][y];
-	            str += grid[x- 1][y];
-	            if(!check(str)) { r++; }
+	    int n = grid.length, sqrt = (int) Math.sqrt(n);
+	    int[] row = new int[n], col = new int[n], box = new int[n];
+
+	    for(int i = 0; i < n; i++) {
+	        for(int j = 0; j < n; j++) {
+	            row[grid[i][j] - 1]++;
+	            col[grid[j][i] - 1]++;   
 	        }
+	        
+	        int sq = i - i % sqrt;
+	        for(int y = sq; y < sq + sqrt; y++) {
+	            for(int x = sq; x < sq + sqrt; x++) box[grid[y][x] - 1]++;
+	        }
+	        
+	        for(int j = 0; j < n; j++)
+	            if(row[j] == 0 || col[j] == 0 || box[j] == 0) return false;
+	        
+	        Arrays.fill(box, 0);
+	        Arrays.fill(row, 0);
+	        Arrays.fill(col, 0);
 	    }
-	    return r == 0;
+
+	    return true;
 	}
 }

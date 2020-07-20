@@ -1,19 +1,16 @@
-import java.util.Arrays;
-
-public final class AvoidObstacles {
+final class AvoidObstacles {
 
 	int avoidObstacles(int[] inputArray) {
-		boolean b = true;
-	    for(int i = 2; true; i++) {
-	        for(int f : inputArray) {
-	        	if(f % i == 0) {
-	        		b = !b;
-	        		break;
-	        	}
+	    boolean k = true;
+	    for(int i = 2; ; i++) {
+	        for(int j : inputArray) {
+	            if(j % i == 0) {
+	                k = !k;
+	                break;
+	            }
 	        }
-	        if(b) { return i; }
-	        b = true;
+	        if(k) return i;
+	        k = true;
 	    }
-    
 	}
 }

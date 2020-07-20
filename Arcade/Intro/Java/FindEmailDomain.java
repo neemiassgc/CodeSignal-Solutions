@@ -1,11 +1,7 @@
-public final class FindEmailDomain {
+final class FindEmailDomain {
 
 	String findEmailDomain(String address) {
-	    String domain = "";
-	    for(int i = address.length() - 1; i > 0; i--) {
-	        if(address.charAt(i) != '@') { domain += address.charAt(i)+""; }
-	        else { return new StringBuilder(domain).reverse().toString(); }
-	    }
-	    return "";
+		String[] pieces = address.split("@");
+		return pieces[pieces.length - 1];
 	}
 }

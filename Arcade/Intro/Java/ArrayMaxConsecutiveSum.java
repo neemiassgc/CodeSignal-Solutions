@@ -1,15 +1,13 @@
-public final class ArrayMaxConsecutiveSum {
+final class ArrayMaxConsecutiveSum {
 
 	int arrayMaxConsecutiveSum(int[] inputArray, int k) {
-    	int max = 0, len = inputArray.length;
-    	for(int i = 0, sum = 0; i < len; i++, sum = 0) {
-    		if(len - i + 1 > k) {
-    			for(int j = 0; j < k; j++) {
-    				sum += inputArray[i + j];
-    			}
-    			max = (sum > max) ? sum : max;
-    		}
-    	}
-    	return max;
-	}
+       int max = 0, t = 0;
+       
+       for(int i = 0; i <= inputArray.length - k; i++, t = 0) {
+           for(int j = i; j < i + k; j++) t += inputArray[j];
+           if(t > max) max = t;
+       }
+       
+       return max;
+    }
 }

@@ -1,11 +1,9 @@
-public final class ArrayMaximalAdjacentDifference {
+import java.util.stream.IntStream;
+
+final class ArrayMaximalAdjacentDifference {
 	
-	int arrayMaximalAdjacentDifference(int[] inputArray) {
-		int m = 0;
-		for(int i = 0; i < inputArray.length - 1; i++) {
-		    int s = Math.abs(inputArray[i + 1] - inputArray[i]);
-		    m = (s > m) ? s : m;
-		}
-		return m;
+	int arrayMaximalAdjacentDifference(int[] inputArray) {    
+	    return IntStream.range(0, inputArray.length - 1)
+	    .map(i -> Math.abs(inputArray[i] - inputArray[i + 1])).max().getAsInt();
 	}
 }
