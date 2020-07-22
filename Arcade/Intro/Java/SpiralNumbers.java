@@ -1,51 +1,24 @@
 final class SpiralNumbers {
 
-	enum Way {
-	    UP, DOWN, LEFT, RIGHT
-	}
-
 	int[][] spiralNumbers(int n) {
 	    int[][] spiral = new int[n][n];
-	    int x = -1, y = 0;
-	    Way ways = Way.RIGHT;
+	    int left = 0, right = n - 1, top = 0, down = n - 1;
 	    
-	    for(int i = 1; i <= n * n; i++) {
-	        switch(ways) {
-	            case RIGHT:
-	                if(spiral[y][x + 1] == 0) spiral[y][x += 1] = i;
-	                else {
-	                    ways = Way.DOWN;
-	                    i--;
-	                }
-	                if(x == n - 1) ways = Way.DOWN;
-	                break;
-	            case DOWN:
-	                if(spiral[y + 1][x] == 0) spiral[y += 1][x] = i;
-	                else {
-	                    ways = Way.LEFT;
-	                    i--;
-	                }
-	                if(y == n - 1) ways = Way.LEFT;
-	                break;
-	            case LEFT:
-	                if(spiral[y][x - 1] == 0) spiral[y][x -= 1] = i;
-	                else {
-	                    ways = Way.UP;
-	                    i--;
-	                }
-	                if(x == 0) ways = Way.UP;
-	                break;
-	            case UP:
-	                if(spiral[y - 1][x] == 0) spiral[y -= 1][x] = i;
-	                else {
-	                    ways = Way.RIGHT;
-	                    i--;
-	                }
-	                if(y == 0) ways = Way.RIGHT;
-	                break;    
-	        }
+	    for(int adder = 1; adder <= n * n; ) {
+	        for(int x = left; x <= right; x++) spiral[top][x] = adder++;
+	        top++;
+	        
+	        for(int y = top; y <= down; y++) spiral[y][right] = adder++;
+	        right--;
+	        
+	        for(int x = right; x >= left; x--) spiral[down][x] = adder++;
+	        down--;
+	        
+	        for(int y = down; y >= top; y--) spiral[y][left] = adder++;
+	        left++;
 	    }
 	    
 	    return spiral;
 	}
+	
 }

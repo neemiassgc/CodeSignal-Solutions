@@ -1,11 +1,11 @@
 const firstNotRepeatingCharacter = (s) => {
-    let counter = [];
-    for(let i = 0; i < 26; i++) { counter.push(0); }
-    for(let i in s) { counter[s.charCodeAt(i) - 97]++; }
-    for(let i in s) {
-        if(counter[s.charCodeAt(i) - 97] == 1) {
-            return s.charAt(i);
-        }
-    }
+    let a = [];
+    
+    for(let i = 0; i < 26; i++) a.push(0);
+    
+    for(let e of s) a[e.charCodeAt(0) - 97]++;
+
+    for(let e of s) if(a[e.charCodeAt(0) - 97] == 1) return e;
+    
     return "_";
 }
