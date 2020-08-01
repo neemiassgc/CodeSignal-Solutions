@@ -33,4 +33,9 @@ final class IsListPalindrome {
         }
         return true;
     }
+     //Alternative
+    boolean checkPalindrome(String inputString) {
+        return new StringBuilder(inputString).reverse().toString().equals(inputString);
+    }
+   
 }
