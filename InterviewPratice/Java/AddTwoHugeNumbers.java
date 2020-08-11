@@ -9,38 +9,43 @@ final class addTwoHugeNumbers {
     //   ListNode<T> next;
     // }
     ListNode<Integer> addTwoHugeNumbers(ListNode<Integer> a, ListNode<Integer> b) {
-        ListNode<Integer> result = new ListNode<Integer>(0);
-        ListNode<Integer> head = result;
-        int carry = 0;
+        ListNode<Integer> out = new ListNode<Integer>(0), ref = out;
+        int d = 0;
+        
         a = reverse(a);
-        b = reverse(b); 
+        b = reverse(b);
+        
         while(a != null || b != null){
+            
             if(a != null){
-                carry += a.value;
+                d += a.value;
                 a = a.next;
             }
+            
             if(b != null){
-                carry += b.value;
+                d += b.value;
                 b = b.next;
             }
-            head.next = new ListNode<Integer>(carry % 10000);
-            head = head.next;
-            carry = carry / 10000;
+            
+            ref.next = new ListNode<Integer>(d % 10000);
+            ref = ref.next;
+            d = d / 10000;
         }
-        if(carry >= 1)
-            head.next= new ListNode<Integer>(carry);
         
-        return reverse(result.next);
+        if(d >= 1) ref.next= new ListNode<Integer>(d);
+        
+        return reverse(out.next);
     }
 
-    ListNode<Integer> reverse(ListNode<Integer> head){
-        ListNode<Integer> prev = null;
-        while(head != null){
-            ListNode<Integer> temp = head.next;
-            head.next = prev;
-            prev = head;
-            head = temp;
+    ListNode<Integer> reverse(ListNode<Integer> l){
+        ListNode<Integer> rev = null;
+        
+        for(; l != null; l = l.next) {
+            ListNode<Integer> head = new ListNode<>(l.value);
+            head.next = rev;
+            rev = head;
         }
-        return prev;
+        
+        return rev;
     }
 }
