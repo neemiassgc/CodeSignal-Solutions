@@ -1,10 +1,7 @@
 final class AmendTheSenteance {
 
-    String amendTheSentence(String s) {
-        String output = "";
-        for(String x : s.split("(?=[A-Z])")) {
-            output += x+" ";
-        }
-        return output.trim().toLowerCase();
-    }
+   String amendTheSentence(String s) {
+	    return Arrays.stream(s.split("(?=[A-Z])"))
+	    .collect(Collectors.joining(" ")).toLowerCase();
+	}
 }

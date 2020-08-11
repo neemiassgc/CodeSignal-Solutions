@@ -1,4 +1,4 @@
-public final class SumOfTwo {
+final class SumOfTwo {
 
 	boolean sumOfTwo(int[] a, int[] b, int v) {
 	    Set<Integer> set = new HashSet<>();

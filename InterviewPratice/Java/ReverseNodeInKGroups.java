@@ -1,5 +1,5 @@
 final class ReverseNodeInKGroups {
-	
+
 	// Singly-linked lists are already defined with this interface:
 	// class ListNode<T> {
 	//   ListNode(T x) {
@@ -9,57 +9,38 @@ final class ReverseNodeInKGroups {
 	//   ListNode<T> next;
 	// }
 	//
-	
-	ListNode<Integer> append(ListNode<Integer> l, int data) {
-	    if(l == null) {
-	        l = new ListNode<>(data);
-	        return l;
+	ListNode<Integer> reverse(ListNode<Integer> l){
+	    ListNode<Integer> rev = null;
+	    
+	    for(; l != null; l = l.next) {
+	        ListNode<Integer> head = new ListNode<>(l.value);
+	        head.next = rev;
+	        rev = head;
 	    }
-	    ListNode<Integer> head = l;
-	    while(head.next != null) {
-	        head = head.next;
-	    }
-	    head.next = new ListNode<>(data);
-	    return l;
-	}
-
-	ListNode<Integer> reverse(ListNode<Integer> l) {
-	    ListNode<Integer> previous = null, current = l, next = null;
-	    while(current != null) {
-	        next = current.next;
-	        current.next = previous;
-	        previous = current;
-	        current = next;
-	    }
-	    return l = previous;
+	    
+	    return rev;
 	}
 
 	ListNode<Integer> reverseNodesInKGroups(ListNode<Integer> l, int k) {
-	    ListNode<Integer> out = null, carry = null;
-	    int c = 0;
+	    ListNode<Integer> out = new ListNode<>(null),
+	    carry = new ListNode<>(null), ref = out, aux = carry;
+	    int i = 1;
 	    
-	    for(; l != null; l = l.next) {
-	        if(c < k) {
-	            carry = append(carry, l.value);
-	            c++;
+	    for(; l != null; l = l.next, i++) {
+	        aux.next = new ListNode<>(l.value);
+	        aux = aux.next;
+	        
+	        if(i % k == 0) {
+	            ref.next = reverse(carry.next);
+	            for(; ref.next != null; ref = ref.next);
+	            
+	            carry = new ListNode<>(l.value);
+	            aux = carry;
+	        }
+	    }
 
-	            if(c == k) {        
-	                carry = reverse(carry);
-	                while(carry != null) {
-	                    out = append(out, carry.value);
-	                    carry = carry.next;
-	                }
-	                carry = null;
-	                c = 0;
-	            }    
-	        }
-	    }
-	    if(c > 0) {
-	        while(carry != null) {
-	            out = append(out, carry.value);
-	            carry = carry.next;
-	        }
-	    }
-	    return out;
+	    ref.next = carry.next;
+	    
+	    return out.next;
 	}
 }

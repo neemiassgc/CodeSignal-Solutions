@@ -1,6 +1,6 @@
 final class IsListPalindrome {
 
-    // Singly-linked lists are already defined with this interface:
+   // Singly-linked lists are already defined with this interface:
     // class ListNode<T> {
     //   ListNode(T x) {
     //     value = x;
@@ -10,27 +10,19 @@ final class IsListPalindrome {
     // }
     //
 
-    ListNode<Integer> reverse(ListNode<Integer> l) {
-        ListNode<Integer> previous = null, current = l, next = null;
-        while(current != null) {
-            next = current.next;
-            current.next = previous;
-            previous = current;
-            current = next;
-        }
-        return l = previous;
-    }
-    
     boolean isListPalindrome(ListNode<Integer> l) {
-        ListNode<Integer> curr = l, prev = reverse(l);
-
-        while(curr != null && prev != null) {
-            if(curr.value != prev.value) {
-                return false;
-            }
-            curr = curr.next;
-            prev = prev.next;
+        ListNode<Integer> rev = new ListNode<>(null), ref = l;
+        
+        for(; ref != null; ref = ref.next) {
+            ListNode<Integer> tmp = new ListNode<>(ref.value);
+            tmp.next = rev;
+            rev = tmp;
         }
+        
+        for(; l != null && rev != null; l = l.next, rev = rev.next)
+            if(!l.value.equals(rev.value)) return false;
+        
         return true;
     }
+
 }
