@@ -1,2 +1,2 @@
 # CodeSignal solutions
-Solutions of coding provided by [CodeSignal Platform](https://codesignal.com)
+Solutions of coding from [CodeSignal](https://codesignal.com) platform
