@@ -1,0 +1,1 @@
+fun largestNumber(n: Int) = (1..n).map { "9" }.joinToString("").toInt()
