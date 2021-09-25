@@ -1,0 +1,1 @@
+fun removeArrayPart(inputArray: MutableList<Int>, l: Int, r: Int) = inputArray.filterIndexed { i, v -> i < l || i > r }
