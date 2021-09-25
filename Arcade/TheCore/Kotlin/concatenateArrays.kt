@@ -1,0 +1,1 @@
+fun concatenateArrays(a: MutableList<Int>, b: MutableList<Int>) = a + b
